@@ -1,4 +1,4 @@
-package com.sesac.reuse.model.entity;
+package com.sesac.reuse.repository;
 
 import com.sesac.reuse.model.entity.Category;
 import com.sesac.reuse.model.enumType.CategoryId;
