@@ -29,6 +29,7 @@ public class Item {
 
     @ManyToOne // Item N : 1 Category
     @JoinColumn(name = "category_id")
+    @Enumerated(EnumType.STRING)
     private Category category;
 
 }

@@ -14,9 +14,7 @@ import java.util.Optional;
 @Service
 public class ItemService {
 
-    @Autowired
     private final CategoryRepository categoryRepository;
-    @Autowired
     private final ItemRepository itemRepository;
 
     @Autowired
@@ -26,9 +24,9 @@ public class ItemService {
     }
 
     // 카테고리별 아이템 조회
-    public List<Item> getItemsByCategoryId(String category_id) {
-        return itemRepository.getItemsByCategoryId(category_id);
-    }
+//    public List<Item> getItemsByCategoryId(String category_id) {
+//        return itemRepository.getItemsByCategoryId(category_id);
+//    }
 
     // 아이템 조회
     public Optional<Item> getItem(String item_id) {
@@ -37,7 +35,16 @@ public class ItemService {
 
     // 아이템 생성
     public Item createItem(Item item) {
-        return itemRepository.save(item);
+
+        Item newItem = Item.builder()
+                .item_id(item.getItem_id())
+                .item_name(item.getItem_name())
+                .recyclable(item.getRecyclable())
+                .recycle_info(item.getRecycle_info())
+                .category(item.getCategory())
+                .build();
+
+        return itemRepository.save(newItem);
     }
 
 

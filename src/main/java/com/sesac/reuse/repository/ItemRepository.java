@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, String> {
 
-    // 카테고리 별 아이템 조회
-    // select * from item where category_id = ?
-    @Query("SELECT i FROM Item i WHERE i.category.category_id = :categoryId")
-    List<Item> getItemsByCategoryId(@Param("category_id") String categoryId);
+//    // 카테고리 별 아이템 조회
+//    // select * from item where category_id = ?
+//    @Query("SELECT i FROM Item i WHERE i.category.category_id = :categoryId")
+//    List<Item> getItemsByCategoryId(@Param("category_id") String categoryId);
 
 }
