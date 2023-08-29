@@ -609,7 +609,10 @@
                         </div>
                       </div>
                       <div class="mb-4">
-                        <button type="submit" class="btn btn-success">수정</button>
+                        <button type="submit" class="btn btn-success">
+                          <a href="javascript:void(0);" th:data-uri="@{|/item/update/${itemDetail.item_id}|}"
+                             class="update"
+                             th:text="수정"></a></button>
                         <button type="submit" class="btn btn-danger">
                           <a href="javascript:void(0);" th:data-uri="@{|/item/remove/${itemDetail.item_id}|}"
                              class="delete"
@@ -665,6 +668,15 @@
       Array.from(delete_elements).forEach(function(element) {
         element.addEventListener('click', function() {
           if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+          };
+        });
+      });
+
+      const update_elements = document.getElementsByClassName("update");
+      Array.from(update_elements).forEach(function(element) {
+        element.addEventListener('click', function() {
+          if(confirm("수정 페이지로 이동하시겠습니까?")) {
             location.href = this.dataset.uri;
           };
         });

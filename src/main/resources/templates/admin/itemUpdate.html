@@ -17,7 +17,7 @@
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../assets/"
+  data-assets-path="/../assets/"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -32,7 +32,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/../assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,24 +43,24 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/../assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="/../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/../assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="/../assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
+    <script src="/../assets/js/config.js"></script>
   </head>
 
   <body>
@@ -509,7 +509,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -518,7 +518,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="/../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -577,46 +577,52 @@
               <div class="col-xxl">
                 <div class="card mb-4">
                   <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">아이템 등록</h5>
+                    <h5 class="mb-0">아이템 수정</h5>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form th:action="@{/item/update/{item_id}(item_id=${itemDetail.item_id})}" method="post">
+                      <input type="text" name="item_id" th:value="${itemDetail.item_id}" required hidden>
                       <div class="mb-4">
                         <label for="category" class="form-label">분류</label>
-                        <select id="category" class="form-select">
-                          <option value="A">가전제품</option>
-                          <option value="B">고철</option>
-                          <option value="C">금속캔</option>
-                          <option value="D">대형폐기물</option>
-                          <option value="E">불연성종량제</option>
-                          <option value="F">비닐</option>
-                          <option value="G">유리병</option>
-                          <option value="H">음식물</option>
-                          <option value="I">의류</option>
-                          <option value="J">재질별분리</option>
-                          <option value="K">전문시설</option>
-                          <option value="L">전용함</option>
-                          <option value="M">종량제봉투</option>
-                          <option value="N">종이</option>
-                          <option value="O">종이팩</option>
-                          <option value="P">주의</option>
-                          <option value="Q">플라스틱</option>
+                        <select id="category" class="form-select" name="category.category_id">
+<!--                          <option value="A">가전제품</option>-->
+<!--                          <option value="B">고철</option>-->
+<!--                          <option value="C">금속캔</option>-->
+<!--                          <option value="D">대형폐기물</option>-->
+<!--                          <option value="E">불연성종량제</option>-->
+<!--                          <option value="F">비닐</option>-->
+<!--                          <option value="G">유리병</option>-->
+<!--                          <option value="H">음식물</option>-->
+<!--                          <option value="I">의류</option>-->
+<!--                          <option value="J">재질별분리</option>-->
+<!--                          <option value="K">전문시설</option>-->
+<!--                          <option value="L">전용함</option>-->
+<!--                          <option value="M">종량제봉투</option>-->
+<!--                          <option value="N">종이</option>-->
+<!--                          <option value="O">종이팩</option>-->
+<!--                          <option value="P">주의</option>-->
+<!--                          <option value="Q">플라스틱</option>-->
+                              <option th:each="cat : ${categories}"
+                                      th:value="${cat.category_id}"
+                                      th:text="${cat.name}"
+                                      th:selected="${cat.category_id == itemDetail.category.category_id}"> <!-- 선택된 카테고리 설정 -->
+                              </option>
                         </select>
                       </div>
                       <div class="mb-4">
                         <label for="recyclable" class="form-label">재활용 가능여부</label>
-                        <select id="recyclable" class="form-select">
+                        <select id="recyclable" class="form-select" name="recyclable">
                           <option value="1">Y</option>
                           <option value="0">N</option>
                         </select>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-company">이름</label>
-                        <input type="text" class="form-control" id="basic-default-company" placeholder="재활용품명 입력하세요">
+                        <input type="text" class="form-control" id="basic-default-company" name="item_name" required th:value="${itemDetail.item_name}" >
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-message">분리수거 방법</label>
-                          <textarea id="basic-default-message" class="form-control" placeholder="분리수거 방법을 입력하세요" aria-label="분리수거 방법을 입력하세요" aria-describedby="basic-icon-default-message2"></textarea>
+                        <textarea id="basic-default-message" class="form-control" name="recycle_info" required th:text="${itemDetail.recycle_info}"></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-message">이미지 파일</label>
@@ -626,7 +632,7 @@
                         </div>
                       </div>
                       <div class="mb-4">
-                        <button type="submit" class="btn btn-primary">Send</button>
+                        <button type="submit" class="btn btn-primary">수정</button>
                       </div>
 
                       <!-- 파일 업로드 -->
@@ -655,18 +661,18 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/../assets/vendor/libs/popper/popper.js"></script>
+    <script src="/../assets/vendor/js/bootstrap.js"></script>
+    <script src="/../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="/../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+    <script src="/../assets/js/main.js"></script>
 
     <!-- Page JS -->
 
