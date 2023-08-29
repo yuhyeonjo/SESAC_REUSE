@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/item")
@@ -25,4 +23,24 @@ public class ItemController {
         model.addAttribute("itemPaging", itemPaging);
         return "admin/itemList";
     }
+
+    @GetMapping("/detail/{item_id}")
+    public String getItem(@PathVariable("item_id") String item_id, Model model){
+        Item itemDetail = itemService.getItem(item_id);
+        model.addAttribute("itemDetail", itemDetail);
+        return "admin/itemDetail";
+    }
+
+    @GetMapping("/remove/{item_id}")
+    public String deleteItem(@PathVariable("item_id") String item_id){
+        itemService.deleteItem(item_id);
+        return "redirect:/item";
+    }
+
+    @GetMapping("/register")
+    public String addItem(){
+        return "admin/addItem";
+    }
+
+
 }

@@ -20,13 +20,15 @@ public class ItemApiController {
     @PostMapping("") // /api/item
     // ResponseEntity 사용해서 응답의 상태 코드, 헤더 및 본문 지정가능
     public ResponseEntity<String> createItem(@RequestBody Item item) {
+        Item newItem = new Item();
+        itemService.createItem(newItem);
         return ResponseEntity.ok("Item created successfully");
     }
 
-    @GetMapping("{item_id}") // /admin/item/A001
-    public Optional<Item> getItem(@PathVariable String item_id) {
-        return itemService.getItem(item_id);
-    }
+//    @GetMapping("{item_id}") // /admin/item/A001
+//    public Item getItem(@PathVariable String item_id) {
+//        return itemService.getItem(item_id);
+//    }
 
     @PutMapping("") // /api/item
     public Item updateItem(@RequestBody Item item) {

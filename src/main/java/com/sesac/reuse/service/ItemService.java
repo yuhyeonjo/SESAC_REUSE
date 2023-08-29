@@ -30,8 +30,13 @@ public class ItemService {
 //    }
 
     // 아이템 조회
-    public Optional<Item> getItem(String item_id) {
-        return itemRepository.findById(item_id);
+    public Item getItem(String item_id) {
+        Optional<Item> item = itemRepository.findById(item_id);
+        if (item.isPresent()) {
+            return item.get();
+        } else {
+            throw new RuntimeException();
+        }
     }
 
     // 아이템 생성

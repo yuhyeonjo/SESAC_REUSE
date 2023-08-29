@@ -192,7 +192,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="../../templates/index.html" class="menu-link">
+                            <a href="../index.html" class="menu-link">
                                 <div data-i18n="Account">Account</div>
                             </a>
                         </li>
@@ -591,9 +591,9 @@
                                 </thead>
                                 <tbody class="table-border-bottom-0">
                                     <tr th:each="item, loop : ${itemPaging}">
-                                        <td th:text="${index}"></td>
+                                        <td th:text="${loop.count}"></td>
                                         <td th:text="${item.category.name}"></td>
-                                        <td th:text="${item.item_id}"></td>
+                                        <td><a th:href="@{|/item/detail/${item.item_id}|}" th:text="${item.item_id}"></a></td>
                                         <td th:text="${item.item_name}"></td>
                                         <td th:text="${item.recycle_info}"></td>
                                     </tr>
@@ -631,9 +631,9 @@
                         </nav>
                         <!--/ Basic Pagination -->
                     </div>
+                    <a th:href="@{/item/register}" class="btn btn-primary">아이템 등록</a>
                 </div>
                 <!-- / Content -->
-
 
                 <div class="content-backdrop fade"></div>
             </div>
