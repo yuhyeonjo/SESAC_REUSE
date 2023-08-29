@@ -4,6 +4,9 @@ import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
 import com.sesac.reuse.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,7 +72,9 @@ public class ItemService {
     }
 
     // 아이템 목록 조회
-    public List<Item> getItemList() {
-        return itemRepository.findAll();
+    public Page<Item> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return itemRepository.findAll(pageable);
     }
+
 }

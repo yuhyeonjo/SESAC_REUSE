@@ -590,8 +590,8 @@
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr th:each="item, index : ${itemList}">
-                                        <td th:text="${index.count}"></td>
+                                    <tr th:each="item, loop : ${itemPaging}">
+                                        <td th:text="${index}"></td>
                                         <td th:text="${item.category.name}"></td>
                                         <td th:text="${item.item_id}"></td>
                                         <td th:text="${item.item_name}"></td>
@@ -606,34 +606,27 @@
                     <div class="demo-inline-spacing center">
                         <!-- Basic Pagination -->
                         <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item first">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-left"></i></a>
-                                </li>
-                                <li class="page-item prev">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">2</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0);">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">5</a>
-                                </li>
-                                <li class="page-item next">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
-                                </li>
-                                <li class="page-item last">
-                                    <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevrons-right"></i></a>
-                                </li>
+                            <div th:if="${!itemPaging.isEmpty()}">
+                                <ul class="pagination justify-content-center">
+                                        <li class="page-item" th:classappend="${!itemPaging.hasPrevious} ? 'disabled'">
+                                            <a class="page-link"
+                                               th:href="@{|?page=${itemPaging.number-1}|}">
+                                                <i class="tf-icon bx bx-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        <li th:each="page: ${#numbers.sequence(0, itemPaging.totalPages-1)}"
+                                            th:if="${page >= itemPaging.number-5 and page <= itemPaging.number+5}"
+                                            th:classappend="${page == itemPaging.number} ? 'active'"
+                                            class="page-item">
+                                            <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                                        </li>
+                                        <li class="page-item" th:classappend="${!itemPaging.hasNext} ? 'disabled'">
+                                            <a class="page-link" th:href="@{|?page=${itemPaging.number+1}|}">
+                                                <i class="tf-icon bx bx-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </ul>
                         </nav>
                         <!--/ Basic Pagination -->
