@@ -1,7 +1,7 @@
 package com.sesac.reuse.model.entity;
 
 import com.sesac.reuse.model.enumType.CategoryId;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,8 +1,6 @@
 package com.sesac.reuse.service;
 
-import com.sesac.reuse.model.entity.Category;
-import com.sesac.reuse.model.entity.CategoryRepository;
-import com.sesac.reuse.model.enumType.CategoryId;
+import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
 import com.sesac.reuse.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
