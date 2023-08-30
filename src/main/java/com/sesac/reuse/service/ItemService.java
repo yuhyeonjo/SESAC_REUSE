@@ -1,10 +1,12 @@
 package com.sesac.reuse.service;
 
+import com.sesac.reuse.model.entity.ItemImage;
 import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
 import com.sesac.reuse.repository.ItemImageRepository;
 import com.sesac.reuse.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,9 @@ public class ItemService {
     private final CategoryRepository categoryRepository;
     private final ItemRepository itemRepository;
     private final ItemImageRepository itemImageRepository;
+
+    @Value("${com.sesac.reuse.upload.path}")// import 시에 springframework으로 시작하는 Value
+    private String uploadPath;
 
     @Autowired
     public ItemService(CategoryRepository categoryRepository, ItemRepository itemRepository, ItemImageRepository itemImageRepository) {
@@ -85,6 +90,15 @@ public class ItemService {
     }
     
     // 이미지 파일 조회
+//    public ItemImage getItemImage(String item_id) {
+//        Optional<ItemImage> itemImage = itemImageRepository.findByItemId(item_id);
+//        if (itemImage.isPresent()) {
+//            return itemImage.get();
+//        } else {
+//            throw new RuntimeException();
+//        }
+//    }
 
+    //
 
 }

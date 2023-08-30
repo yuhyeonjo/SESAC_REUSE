@@ -22,4 +22,10 @@ public interface ItemRepository extends JpaRepository<Item, String> {
 
     // 페이징 처리
     Page<Item> findAll(Pageable pageable);
+
+    // item_id 뒷 자리수 가져오기
+    @Query(value = "SELECT SUBSTR(item_id, 2) FROM Item i WHERE i.category_id = :category_id ORDER BY created_at DESC LIMIT 1", nativeQuery = true)
+    String findLastItemIdByCategoryId(@Param("category_id") String category_id);
+
+
 }

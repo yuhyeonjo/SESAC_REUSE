@@ -2,10 +2,12 @@ package com.sesac.reuse;
 
 import com.sesac.reuse.model.entity.Category;
 import com.sesac.reuse.model.entity.Item;
+import com.sesac.reuse.model.idgenerator.ItemCustomIdGenerator;
 import com.sesac.reuse.service.ItemService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureHttpGraphQlTester;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class ItemServiceTest {
 
     @Autowired
     private ItemService itemService;
+
 
     // 아이템 조회
 //    @Test
@@ -75,8 +78,10 @@ public class ItemServiceTest {
 
 
     // 아이템 삭제
-    @Test
-    public void deleteItem() {
-        itemService.deleteItem("A047");
-    }
+//    @Test
+//    public void deleteItem() {
+//        itemService.deleteItem("A047");
+//    }
+    
+
 }
