@@ -22,7 +22,6 @@ public class ItemServiceTest {
     @Autowired
     private ItemService itemService;
 
-
     // 아이템 조회
 //    @Test
 //    public void getItem() {

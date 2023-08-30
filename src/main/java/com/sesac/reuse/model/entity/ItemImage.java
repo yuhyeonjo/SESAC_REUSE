@@ -1,6 +1,5 @@
 package com.sesac.reuse.model.entity;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,31 +7,28 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "item_image")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
-public class Item {
+public class ItemImage {
 
     @Id
-    private String item_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long image_id;
 
-    private String item_name;
+    private String image_path;
 
-    private String recycle_info;
-
-    private Boolean recyclable;
-
-    @ManyToOne // Item N : 1 Category
-    @JoinColumn(name = "category_id")
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
-    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    private ItemImage itemImage;
+    private String image_name;
 
 
+    @OneToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 }

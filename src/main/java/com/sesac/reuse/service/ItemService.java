@@ -2,6 +2,7 @@ package com.sesac.reuse.service;
 
 import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
+import com.sesac.reuse.repository.ItemImageRepository;
 import com.sesac.reuse.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,11 +17,13 @@ public class ItemService {
 
     private final CategoryRepository categoryRepository;
     private final ItemRepository itemRepository;
+    private final ItemImageRepository itemImageRepository;
 
     @Autowired
-    public ItemService(CategoryRepository categoryRepository, ItemRepository itemRepository) {
+    public ItemService(CategoryRepository categoryRepository, ItemRepository itemRepository, ItemImageRepository itemImageRepository) {
         this.categoryRepository = categoryRepository;
         this.itemRepository = itemRepository;
+        this.itemImageRepository = itemImageRepository;
     }
 
     // 카테고리별 아이템 조회
@@ -81,5 +83,8 @@ public class ItemService {
         Pageable pageable = PageRequest.of(page, 10);
         return itemRepository.findAll(pageable);
     }
+    
+    // 이미지 파일 조회
+
 
 }
