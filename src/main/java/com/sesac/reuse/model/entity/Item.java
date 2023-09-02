@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -28,12 +30,14 @@ public class Item {
 
     private Boolean recyclable;
 
-    private Date created_at;
+    private LocalDateTime created_at;
 
     @ManyToOne // Item N : 1 Category
     @JoinColumn(name = "category_id")
     @Enumerated(EnumType.STRING)
     private Category category;
+
+
 
 //    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
 //    private ItemImage itemImage;

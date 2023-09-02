@@ -1,6 +1,5 @@
 package com.sesac.reuse.service;
 
-import com.sesac.reuse.model.entity.ItemImage;
 import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
 import com.sesac.reuse.repository.ItemImageRepository;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -20,6 +20,7 @@ public class ItemService {
     private final CategoryRepository categoryRepository;
     private final ItemRepository itemRepository;
     private final ItemImageRepository itemImageRepository;
+
 
     @Value("${com.sesac.reuse.upload.path}")// import 시에 springframework으로 시작하는 Value
     private String uploadPath;
@@ -55,6 +56,7 @@ public class ItemService {
                 .recyclable(item.getRecyclable())
                 .recycle_info(item.getRecycle_info())
                 .category(item.getCategory())
+                .created_at(LocalDateTime.now())
                 .build();
 
         return itemRepository.save(newItem);
@@ -62,20 +64,27 @@ public class ItemService {
 
 
     // 아이템 수정
-    public Item updateItem(Item item) {
-        Optional<Item> optional = itemRepository.findById(item.getItem_id());
-
-        return optional.map(entityItem -> {
-                    // data -> update
-                    entityItem.setItem_id(item.getItem_id())
-                            .setItem_name(item.getItem_name())
-                            .setRecycle_info(item.getRecycle_info())
-                            .setRecyclable(item.getRecyclable())
-                            .setCategory(item.getCategory());
-                    return itemRepository.save(entityItem);
-                })
-                .orElseThrow(() -> new RuntimeException("Update error"));
-    }
+//    public Optional<Item> updateItem(Item item) {
+//        System.out.println("service item = " + item);
+//        Optional<Item> optional = itemRepository.findById(item.getItem_id());
+//        if (optional.isPresent()) {
+////            Item item1 = optional.get();
+////            System.out.println("Value is present: " + item1);
+//            return optional.map(entityItem -> {
+//                // data -> update
+//                entityItem.setItem_id(item.getItem_id())
+//                        .setItem_name(item.getItem_name())
+//                        .setRecycle_info(item.getRecycle_info())
+//                        .setRecyclable(item.getRecyclable())
+//                        .setCategory(item.getCategory());
+//                return itemRepository.save(entityItem);
+//            });
+//        } else {
+//            System.out.println("Value is not present.");
+//
+//        }
+//        return optional;
+//    }
 
 
     // 아이템 삭제

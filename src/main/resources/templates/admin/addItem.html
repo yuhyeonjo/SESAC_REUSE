@@ -588,62 +588,55 @@
                     <h5 class="mb-0">아이템 등록</h5>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form th:action="@{/item/register}" method="post">
                       <div class="mb-4">
                         <label for="category" class="form-label">분류</label>
-                        <select id="category" class="form-select">
-                          <option value="A">가전제품</option>
-                          <option value="B">고철</option>
-                          <option value="C">금속캔</option>
-                          <option value="D">대형폐기물</option>
-                          <option value="E">불연성종량제</option>
-                          <option value="F">비닐</option>
-                          <option value="G">유리병</option>
-                          <option value="H">음식물</option>
-                          <option value="I">의류</option>
-                          <option value="J">재질별분리</option>
-                          <option value="K">전문시설</option>
-                          <option value="L">전용함</option>
-                          <option value="M">종량제봉투</option>
-                          <option value="N">종이</option>
-                          <option value="O">종이팩</option>
-                          <option value="P">주의</option>
-                          <option value="Q">플라스틱</option>
+                        <select id="category" class="form-select" name="category.category_id">
+                          <option th:each="cat : ${categories}"
+                                  th:value="${cat.category_id}"
+                                  th:text="${cat.name}">
+                          </option>
                         </select>
                       </div>
                       <div class="mb-4">
                         <label for="recyclable" class="form-label">재활용 가능여부</label>
-                        <select id="recyclable" class="form-select">
+                        <select id="recyclable" class="form-select" name="recyclable">
                           <option value="1">Y</option>
                           <option value="0">N</option>
                         </select>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-company">이름</label>
-                        <input type="text" class="form-control" id="basic-default-company" placeholder="재활용품명 입력하세요">
+                        <input type="text" class="form-control" id="basic-default-company" name="item_name" placeholder="재활용품명 입력하세요">
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-message">분리수거 방법</label>
-                          <textarea id="basic-default-message" class="form-control" placeholder="분리수거 방법을 입력하세요" aria-label="분리수거 방법을 입력하세요" aria-describedby="basic-icon-default-message2"></textarea>
+                          <textarea id="basic-default-message" class="form-control" placeholder="분리수거 방법을 입력하세요" name="recycle_info" aria-label="분리수거 방법을 입력하세요" aria-describedby="basic-icon-default-message2"></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-message">이미지 파일</label>
-                        <div class="col-sm-10 input-group">
-                          <input type="file" class="form-control" id="inputGroupFile02">
-                          <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                        </div>
+<!--                        <div class="col-sm-10 input-group">-->
+<!--                          <input type="file" class="form-control" id="inputGroupFile02">-->
+<!--                          <label class="input-group-text" for="inputGroupFile02">Upload</label>-->
+<!--                        </div>-->
                       </div>
+                      <div th:each="entry : ${itemCustomIdList}">
+                        <input type="text" class="itemCustomIdList" th:value="${entry.value}" th:attr="data-key=${entry.key}" hidden>
+                      </div>
+                      <!-- 카테고리 변경 시 item_id 도 변경 -->
+                      <input type="text" id="itemCustomId" name="item_id" hidden>
                       <div class="mb-4">
-                        <button type="submit" class="btn btn-primary">Send</button>
+                        <button type="submit" class="btn btn-primary" onclick="createInputId()">Send</button>
                       </div>
 
                       <!-- 파일 업로드 -->
 
                     </form>
+                    <!-- 썸머노트 적용 -->
                     <!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
-                    <form method="post">
-                      <textarea id="summernote" name="editordata"></textarea>
-                    </form>
+<!--                    <form method="post">-->
+<!--                      <textarea id="summernote" name="editordata"></textarea>-->
+<!--                    </form>-->
 
                   </div>
                 </div>
@@ -686,19 +679,34 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- Summernote 적용 -->
-    <script>
-      $(document).ready(function() {
-        $('#summernote').summernote({
-          height: 300,                 // 에디터 높이
-          minHeight: null,             // 최소 높이
-          maxHeight: null,             // 최대 높이
-          focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-          lang: "ko-KR",					// 한글 설정
-          placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+<!--    <script>-->
+<!--      $(document).ready(function() {-->
+<!--        $('#summernote').summernote({-->
+<!--          height: 300,                 // 에디터 높이-->
+<!--          minHeight: null,             // 최소 높이-->
+<!--          maxHeight: null,             // 최대 높이-->
+<!--          focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부-->
+<!--          lang: "ko-KR",					// 한글 설정-->
+<!--          placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정-->
 
+<!--        });-->
+<!--      });-->
+<!--    </script>-->
+    <script th:inline="javascript">
+      function createInputId() {
+        var itemCustomIdList = document.querySelectorAll(".itemCustomIdList");
+        var itemCustomId = document.getElementById("itemCustomId");
+
+        var selectElement = document.getElementById("category");
+        var selectedValue = selectElement.value;
+        var inputElements = document.querySelectorAll('[data-key="' + selectedValue + '"]');
+        var inputField = document.getElementById("itemCustomId");
+
+        inputElements.forEach(function (e) {
+          var inputValue = e.value;
+          inputField.value = inputValue;
         });
-      });
+      }
     </script>
-
   </body>
 </html>

@@ -41,17 +41,6 @@ public class ItemCustomIdGeneratorTest {
 
 
     // item_id에 대한 마지막 번호 추출
-//    @Test
-//    public void findLastItemIdByCategoryId() {
-//        Item item = itemService.getItem("A001");
-//        ItemCustomKeyEntity itemCustomKeyEntity = new ItemCustomKeyEntity();
-//        itemCustomKeyEntity.setId("1");
-//        itemCustomKeyEntity.setItem(item);
-//        Serializable id = itemCustomIdGenerator.generate(session, item);
-//        System.out.println(id);
-//    }
-
-
     @BeforeEach
     public void setup() {
         itemCustomIdGenerator = new ItemCustomIdGenerator();
@@ -69,7 +58,7 @@ public class ItemCustomIdGeneratorTest {
         when(session.createQuery(anyString())).thenReturn(query);
         when(query.getSingleResult()).thenReturn(1);
 
-        Item item = itemService.getItem("A001");
+        Item item = itemService.getItem("B002");
         ItemCustomKeyEntity itemCustomKeyEntity = new ItemCustomKeyEntity();
         itemCustomKeyEntity.setId("1");
         itemCustomKeyEntity.setItem(item);
@@ -80,7 +69,7 @@ public class ItemCustomIdGeneratorTest {
     // findLastItemIdByCategoryId 쿼리 : 카테고리별 마지막 번호 추출
     @Test
     public void queryTest() {
-        int num = Integer.parseInt(itemRepository.findLastItemIdByCategoryId("A"));
+        int num = Integer.parseInt(itemRepository.findLastItemIdByCategoryId("B"));
         Assertions.assertEquals(num, 46);
         System.out.println(num);
     }

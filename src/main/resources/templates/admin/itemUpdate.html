@@ -581,7 +581,6 @@
                   </div>
                   <div class="card-body">
                     <form th:action="@{/item/update/{item_id}(item_id=${itemDetail.item_id})}" method="post">
-                      <input type="text" name="item_id" th:value="${itemDetail.item_id}" required hidden>
                       <div class="mb-4">
                         <label for="category" class="form-label">분류</label>
                         <select id="category" class="form-select" name="category.category_id">
@@ -631,8 +630,14 @@
                           <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
                       </div>
+                      <!-- item_id 조합 리스트 -->
+                      <div th:each="entry : ${itemCustomIdList}">
+                        <input type="text" class="itemCustomIdList" th:value="${entry.value}" th:attr="data-key=${entry.key}" hidden>
+                      </div>
+                      <!-- 카테고리 변경 시 item_id 도 변경 -->
+                      <input type="text" id="itemCustomId" name="item_id" th:value="${itemDetail.item_id}" hidden>
                       <div class="mb-4">
-                        <button type="submit" class="btn btn-primary">수정</button>
+                        <button type="submit" class="btn btn-primary" onclick="updateInputId()">수정</button>
                       </div>
 
                       <!-- 파일 업로드 -->
@@ -678,5 +683,32 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <!-- item_id 조합 스크립트 -->
+<!--    <script>-->
+<!--      function combineAndSubmit() {-->
+<!--        var name1Value = document.getElementById("name1").value;-->
+<!--        var name2Value = document.getElementById("name2").value;-->
+<!--        var combinedValue = name1Value + "-" + name2Value; // 조합 예시-->
+<!--        document.getElementById("combinedValue").value = combinedValue;-->
+<!--        document.querySelector("form").submit();-->
+<!--      }-->
+<!--    </script>-->
+    <script th:inline="javascript">
+      function updateInputId() {
+        var itemCustomIdList = document.querySelectorAll(".itemCustomIdList");
+        var itemCustomId = document.getElementById("itemCustomId");
+
+        var selectElement = document.getElementById("category");
+        var selectedValue = selectElement.value;
+        var inputElements = document.querySelectorAll('[data-key="' + selectedValue + '"]');
+        var inputField = document.getElementById("itemCustomId");
+
+        inputElements.forEach(function (e) {
+          var inputValue = e.value;
+          inputField.value = inputValue;
+        });
+      }
+    </script>
   </body>
 </html>

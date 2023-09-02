@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureHttpGraphQlTester;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,18 +63,17 @@ public class ItemServiceTest {
 //    }
 
 
-    // 아이템 수정
+   //  아이템 수정
 //    @Test
 //    public void updateItem() {
 //        Item updateItem = new Item();
-//        updateItem.setItem_id("A047");
-//        updateItem.setItem_name("A047 name");
+//        updateItem.setItem_id("A046");
+//        updateItem.setItem_name("A046 name");
 //        updateItem.setRecyclable(Boolean.TRUE);
-//        updateItem.setRecycle_info("A047 수정2 info");
+//        updateItem.setRecycle_info("A046 수정2 info");
 //        updateItem.setCategory(Category.builder().category_id(B).build());
-//
+//        updateItem.setCreated_at(LocalDateTime.now());
 //        itemService.updateItem(updateItem);
-//        Assertions.assertNotNull(updateItem);
 //    }
 
 
