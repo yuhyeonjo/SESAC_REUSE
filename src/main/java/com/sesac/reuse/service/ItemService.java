@@ -65,27 +65,6 @@ public class ItemService {
 
 
     // 아이템 수정
-//    public Optional<Item> updateItem(Item item) {
-//        System.out.println("service item = " + item);
-//        Optional<Item> optional = itemRepository.findById(item.getItem_id());
-//        if (optional.isPresent()) {
-////            Item item1 = optional.get();
-////            System.out.println("Value is present: " + item1);
-//            return optional.map(entityItem -> {
-//                // data -> update
-//                entityItem.setItem_id(item.getItem_id())
-//                        .setItem_name(item.getItem_name())
-//                        .setRecycle_info(item.getRecycle_info())
-//                        .setRecyclable(item.getRecyclable())
-//                        .setCategory(item.getCategory());
-//                return itemRepository.save(entityItem);
-//            });
-//        } else {
-//            System.out.println("Value is not present.");
-//
-//        }
-//        return optional;
-//    }
     public Item updateItem(Item item) {
         Optional<Item> optional = itemRepository.findById(item.getItem_id());
 

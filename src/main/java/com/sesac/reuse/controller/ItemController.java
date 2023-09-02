@@ -85,16 +85,16 @@ public class ItemController {
     @PostMapping("/update/{item_id}")
     public String updateItem(@PathVariable("item_id") String item_id, Item updateItem){
         updateItem.setCreatedAt(LocalDateTime.now());
-//        System.out.println(itemId);
-//        System.out.println(updateItem.getItem_id());
-//        System.out.println(updateItem.getItem_name());
-//        System.out.println(updateItem.getCategory());
-//        System.out.println(updateItem.getRecyclable());
-//        System.out.println(updateItem.getRecycle_info());
-//        System.out.println(updateItem.getCreated_at());
-        System.out.println("ItemController.updateItem" + updateItem);
-        Item item = itemService.updateItem(updateItem);
-        return "redirect:/item/detail/" + item_id;
+
+        if(!item_id.equals(updateItem.getItem_id())) { // 기존 item_id 와 다르면 삭제하고 다시 추가
+            itemService.deleteItem(item_id);
+            itemService.createItem(updateItem);
+            return "redirect:/item";
+        } else { // 기존 item_id 와 같으면 수정
+            Item item = itemService.updateItem(updateItem);
+            return "redirect:/item/detail/" + item_id;
+        }
+
     }
 
 
