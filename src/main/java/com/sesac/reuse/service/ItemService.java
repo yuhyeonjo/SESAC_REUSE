@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -56,7 +57,7 @@ public class ItemService {
                 .recyclable(item.getRecyclable())
                 .recycle_info(item.getRecycle_info())
                 .category(item.getCategory())
-                .created_at(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .build();
 
         return itemRepository.save(newItem);
@@ -94,7 +95,8 @@ public class ItemService {
 
     // 아이템 목록 조회
     public Page<Item> getList(int page) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        Pageable pageable = PageRequest.of(page, 10, sort);
         return itemRepository.findAll(pageable);
     }
     

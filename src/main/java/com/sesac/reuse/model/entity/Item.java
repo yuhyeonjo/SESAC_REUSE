@@ -30,7 +30,7 @@ public class Item {
 
     private Boolean recyclable;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @ManyToOne // Item N : 1 Category
     @JoinColumn(name = "category_id")
