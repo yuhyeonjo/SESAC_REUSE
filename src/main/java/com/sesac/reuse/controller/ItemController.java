@@ -82,20 +82,20 @@ public class ItemController {
     }
 
     // 아이템 수정
-//    @PostMapping("/update/{item_id}")
-//    public String updateItem(@PathVariable("item_id") String item_id, Item updateItem){
-//        updateItem.setCreated_at(LocalDateTime.now());
-////        System.out.println(itemId);
-////        System.out.println(updateItem.getItem_id());
-////        System.out.println(updateItem.getItem_name());
-////        System.out.println(updateItem.getCategory());
-////        System.out.println(updateItem.getRecyclable());
-////        System.out.println(updateItem.getRecycle_info());
-////        System.out.println(updateItem.getCreated_at());
-//        System.out.println("ItemController.updateItem" + updateItem);
-//        Item item = itemService.updateItem(updateItem);
-//        return "redirect:/item/detail/" + item.getItem_id();
-//    }
+    @PostMapping("/update/{item_id}")
+    public String updateItem(@PathVariable("item_id") String item_id, Item updateItem){
+        updateItem.setCreatedAt(LocalDateTime.now());
+//        System.out.println(itemId);
+//        System.out.println(updateItem.getItem_id());
+//        System.out.println(updateItem.getItem_name());
+//        System.out.println(updateItem.getCategory());
+//        System.out.println(updateItem.getRecyclable());
+//        System.out.println(updateItem.getRecycle_info());
+//        System.out.println(updateItem.getCreated_at());
+        System.out.println("ItemController.updateItem" + updateItem);
+        Item item = itemService.updateItem(updateItem);
+        return "redirect:/item/detail/" + item_id;
+    }
 
 
 }

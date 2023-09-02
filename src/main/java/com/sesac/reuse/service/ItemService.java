@@ -86,6 +86,20 @@ public class ItemService {
 //        }
 //        return optional;
 //    }
+    public Item updateItem(Item item) {
+        Optional<Item> optional = itemRepository.findById(item.getItem_id());
+
+        return optional.map(entityItem -> {
+                    // data -> update
+                    entityItem.setItem_id(item.getItem_id())
+                            .setItem_name(item.getItem_name())
+                            .setRecycle_info(item.getRecycle_info())
+                            .setRecyclable(item.getRecyclable())
+                            .setCategory(item.getCategory());
+                    return itemRepository.save(entityItem);
+                })
+                .orElseThrow(() -> new RuntimeException("Update error"));
+    }
 
 
     // 아이템 삭제

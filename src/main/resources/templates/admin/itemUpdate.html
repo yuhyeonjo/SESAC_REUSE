@@ -636,6 +636,7 @@
                       </div>
                       <!-- 카테고리 변경 시 item_id 도 변경 -->
                       <input type="text" id="itemCustomId" name="item_id" th:value="${itemDetail.item_id}" hidden>
+                      <input type="text" id="itemId" th:value="${itemDetail.category.category_id}" hidden>
                       <div class="mb-4">
                         <button type="submit" class="btn btn-primary" onclick="updateInputId()">수정</button>
                       </div>
@@ -703,11 +704,16 @@
         var selectedValue = selectElement.value;
         var inputElements = document.querySelectorAll('[data-key="' + selectedValue + '"]');
         var inputField = document.getElementById("itemCustomId");
+        var inputIdField = document.getElementById("itemId");
+        console.log("selectedValue : " + selectedValue);
+        console.log("inputIdField : " + inputIdField.value);
+        if(selectedValue !== inputIdField.value){
+          inputElements.forEach(function (e) {
+            var inputValue = e.value;
+            inputField.value = inputValue;
+          });
+        }
 
-        inputElements.forEach(function (e) {
-          var inputValue = e.value;
-          inputField.value = inputValue;
-        });
       }
     </script>
   </body>
