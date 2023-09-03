@@ -1,5 +1,6 @@
 package com.sesac.reuse.service;
 
+import com.sesac.reuse.model.entity.ItemImage;
 import com.sesac.reuse.repository.CategoryRepository;
 import com.sesac.reuse.model.entity.Item;
 import com.sesac.reuse.repository.ItemImageRepository;
@@ -41,12 +42,14 @@ public class ItemService {
     // 아이템 조회
     public Item getItem(String item_id) {
         Optional<Item> item = itemRepository.findById(item_id);
+        Optional<ItemImage> itemImage = itemImageRepository.findByItemId(item_id);
         if (item.isPresent()) {
             return item.get();
         } else {
             throw new RuntimeException();
         }
     }
+
 
     // 아이템 생성
     public Item createItem(Item item) {

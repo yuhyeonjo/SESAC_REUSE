@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ItemImageRepository extends JpaRepository<ItemImage, Long> {
     
     // 아이템 이미지 조회
-//    @Query("SELECT i FROM ItemImage i WHERE i.item = :item_id")
-//    Optional<ItemImage> findByItemId(@Param("item_id") String item_id);
+    @Query("SELECT i FROM ItemImage i WHERE i.item.item_id = :item_id")
+    Optional<ItemImage> findByItemId(@Param("item_id") String item_id);
 
 }

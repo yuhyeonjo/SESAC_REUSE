@@ -686,15 +686,6 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- item_id 조합 스크립트 -->
-<!--    <script>-->
-<!--      function combineAndSubmit() {-->
-<!--        var name1Value = document.getElementById("name1").value;-->
-<!--        var name2Value = document.getElementById("name2").value;-->
-<!--        var combinedValue = name1Value + "-" + name2Value; // 조합 예시-->
-<!--        document.getElementById("combinedValue").value = combinedValue;-->
-<!--        document.querySelector("form").submit();-->
-<!--      }-->
-<!--    </script>-->
     <script th:inline="javascript">
       function updateInputId() {
         var itemCustomIdList = document.querySelectorAll(".itemCustomIdList");
@@ -713,7 +704,6 @@
             inputField.value = inputValue;
           });
         }
-
       }
     </script>
   </body>

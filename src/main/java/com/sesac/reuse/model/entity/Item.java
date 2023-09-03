@@ -38,9 +38,8 @@ public class Item {
     private Category category;
 
 
-
-//    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-//    private ItemImage itemImage;
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    private ItemImage itemImage;
 
 
 }

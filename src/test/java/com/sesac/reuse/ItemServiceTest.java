@@ -2,7 +2,9 @@ package com.sesac.reuse;
 
 import com.sesac.reuse.model.entity.Category;
 import com.sesac.reuse.model.entity.Item;
+import com.sesac.reuse.model.entity.ItemImage;
 import com.sesac.reuse.model.idgenerator.ItemCustomIdGenerator;
+import com.sesac.reuse.repository.ItemImageRepository;
 import com.sesac.reuse.service.ItemService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,13 +29,14 @@ public class ItemServiceTest {
 
 
     // 아이템 조회
-//    @Test
-//    public void getItem() {
-//        Optional<Item> item = itemService.getItem("A001");
-//        // Optional 객체가 값을 가지고 있다면 true, 값이 없다면 false 리턴
-//        Assertions.assertTrue(item.isPresent());
-//    }
-//
+    @Test
+    public void getItem() {
+        Item item = itemService.getItem("A001");
+        System.out.println(item.getItemImage().getImage_id());
+        System.out.println(item.getItemImage().getImage_path());
+        Assertions.assertEquals(item.getItem_id(), item.getItemImage().getItem().getItem_id());
+    }
+
 //    // 아이템 목록 조회
 //    @Test
 //    public void getItemList() {
