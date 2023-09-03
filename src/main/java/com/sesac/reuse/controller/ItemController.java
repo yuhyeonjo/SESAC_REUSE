@@ -2,6 +2,7 @@ package com.sesac.reuse.controller;
 
 import com.sesac.reuse.model.entity.Category;
 import com.sesac.reuse.model.entity.Item;
+import com.sesac.reuse.model.entity.ItemImage;
 import com.sesac.reuse.service.CategoryService;
 import com.sesac.reuse.service.ItemCustomIdSevice;
 import com.sesac.reuse.service.ItemService;
@@ -40,9 +41,7 @@ public class ItemController {
     @GetMapping("/detail/{item_id}")
     public String getItem(@PathVariable("item_id") String item_id, Model model){
         Item itemDetail = itemService.getItem(item_id);
-//        ItemImage itemImage = itemService.getItemImage(item_id);
         model.addAttribute("itemDetail", itemDetail);
-//        model.addAttribute("itemImage", itemImage);
         return "admin/itemDetail";
     }
 

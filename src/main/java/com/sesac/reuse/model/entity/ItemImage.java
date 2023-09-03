@@ -21,11 +21,14 @@ public class ItemImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long image_id;
+    @Column(name = "image_id")
+    private Long id;
 
-    private String image_path;
+    @Column(name = "image_path")
+    private String path;
 
-    private String image_name;
+    @Column(name = "image_name")
+    private String name;
 
 
     @OneToOne

@@ -32,8 +32,8 @@ public class ItemServiceTest {
     @Test
     public void getItem() {
         Item item = itemService.getItem("A001");
-        System.out.println(item.getItemImage().getImage_id());
-        System.out.println(item.getItemImage().getImage_path());
+        System.out.println(item.getItemImage().getId());
+        System.out.println(item.getItemImage().getPath());
         Assertions.assertEquals(item.getItem_id(), item.getItemImage().getItem().getItem_id());
     }
 
