@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -22,11 +23,14 @@ import java.util.Optional;
 public class Item {
 
     @Id
-    private String item_id;
+    @Column(name= "item_id")
+    private String id;
 
-    private String item_name;
+    @Column(name = "item_name")
+    private String name;
 
-    private String recycle_info;
+    @Column(name = "recycle_info")
+    private String recycleInfo;
 
     private Boolean recyclable;
 

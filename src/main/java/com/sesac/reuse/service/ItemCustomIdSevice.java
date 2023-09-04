@@ -33,7 +33,7 @@ public class ItemCustomIdSevice {
         List<Category> categories = categoryService.getCategoryList();
 
         for (int i = 0; i < categories.size(); i++) {
-            String key = String.valueOf(categories.get(i).getCategory_id());
+            String key = String.valueOf(categories.get(i).getCategoryId());
             String value = this.generateId(key);
             resultMap.put(key, value);
         }

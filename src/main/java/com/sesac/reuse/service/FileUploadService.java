@@ -24,28 +24,28 @@ public class FileUploadService {
         this.itemImageRepository = itemImageRepository;
     }
 
-    @Transactional
-    public ItemImage saveFile(ItemImage itemImage) {
-        itemImage = ItemImage.builder()
-                .name(itemImage.getName())
-                .path(itemImage.getPath())
-                .item(Item.builder().item_id(itemImage.getItem().getItem_id()).build())
-                .build();
-        return itemImageRepository.save(itemImage);
-    }
-
-    @Transactional
-    public ItemImage getFile(Long id) {
-        ItemImage itemImage = itemImageRepository.findById(id).get();
-
-//        ItemImage fileDto = FileDto.builder()
-//                .id(id)
-//                .origFilename(file.getOrigFilename())
-//                .filename(file.getFilename())
-//                .filePath(file.getFilePath())
+//    @Transactional
+//    public ItemImage saveFile(ItemImage itemImage) {
+//        itemImage = ItemImage.builder()
+//                .name(itemImage.getName())
+//                .path(itemImage.getPath())
+//                .item(Item.builder().item_id(itemImage.getItem().getItem_id()).build())
 //                .build();
-        return itemImage;
-    }
+//        return itemImageRepository.save(itemImage);
+//    }
+//
+//    @Transactional
+//    public ItemImage getFile(Long id) {
+//        ItemImage itemImage = itemImageRepository.findById(id).get();
+//
+////        ItemImage fileDto = FileDto.builder()
+////                .id(id)
+////                .origFilename(file.getOrigFilename())
+////                .filename(file.getFilename())
+////                .filePath(file.getFilePath())
+////                .build();
+//        return itemImage;
+//    }
 
 
 

@@ -38,16 +38,16 @@ public class ItemController {
     }
 
     // 아이템 조회
-    @GetMapping("/detail/{item_id}")
-    public String getItem(@PathVariable("item_id") String item_id, Model model){
-        Item itemDetail = itemService.getItem(item_id);
+    @GetMapping("/detail/{itemId}")
+    public String getItem(@PathVariable("itemId") String itemId, Model model){
+        Item itemDetail = itemService.getItem(itemId);
         model.addAttribute("itemDetail", itemDetail);
         return "admin/itemDetail";
     }
 
     // 아이템 삭제
-    @GetMapping("/remove/{item_id}")
-    public String deleteItem(@PathVariable("item_id") String itemId){
+    @GetMapping("/remove/{itemId}")
+    public String deleteItem(@PathVariable("itemId") String itemId){
         itemService.deleteItem(itemId);
         return "redirect:/item";
     }
@@ -69,9 +69,9 @@ public class ItemController {
     }
 
     // 아이템 수정 페이지 이동
-    @GetMapping("/update/{item_id}")
-    public String updateItem(@PathVariable("item_id") String item_id, Model model){
-        Item itemDetail = itemService.getItem(item_id);
+    @GetMapping("/update/{itemId}")
+    public String updateItem(@PathVariable("itemId") String itemId, Model model){
+        Item itemDetail = itemService.getItem(itemId);
         List<Category> categories = categoryService.getCategoryList();
         Map<String, String> itemCustomIdList = itemCustomIdSevice.getItemCustomIdList();
         model.addAttribute("categories", categories);
@@ -81,17 +81,17 @@ public class ItemController {
     }
 
     // 아이템 수정
-    @PostMapping("/update/{item_id}")
-    public String updateItem(@PathVariable("item_id") String item_id, Item updateItem){
+    @PostMapping("/update/{itemId}")
+    public String updateItem(@PathVariable("itemId") String itemId, Item updateItem){
         updateItem.setCreatedAt(LocalDateTime.now());
 
-        if(!item_id.equals(updateItem.getItem_id())) { // 기존 item_id 와 다르면 삭제하고 다시 추가
-            itemService.deleteItem(item_id);
+        if(!itemId.equals(updateItem.getId())) { // 기존 item_id 와 다르면 삭제하고 다시 추가
+            itemService.deleteItem(itemId);
             itemService.createItem(updateItem);
             return "redirect:/item";
         } else { // 기존 item_id 와 같으면 수정
             Item item = itemService.updateItem(updateItem);
-            return "redirect:/item/detail/" + item_id;
+            return "redirect:/item/detail/" + itemId;
         }
 
     }

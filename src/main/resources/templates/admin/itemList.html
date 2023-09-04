@@ -593,9 +593,9 @@
                                     <tr th:each="item, loop : ${itemPaging}">
                                         <td th:text="${loop.count}"></td>
                                         <td th:text="${item.category.name}"></td>
-                                        <td><a th:href="@{|/item/detail/${item.item_id}|}" th:text="${item.item_id}"></a></td>
-                                        <td th:text="${item.item_name}"></td>
-                                        <td th:text="${item.recycle_info}"></td>
+                                        <td><a th:href="@{|/item/detail/${item.id}|}" th:text="${item.id}"></a></td>
+                                        <td th:text="${item.name}"></td>
+                                        <td th:text="${item.recycleInfo}"></td>
                                     </tr>
                                 </tbody>
                             </table>

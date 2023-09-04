@@ -40,9 +40,9 @@ public class ItemService {
 //    }
 
     // 아이템 조회
-    public Item getItem(String item_id) {
-        Optional<Item> item = itemRepository.findById(item_id);
-        Optional<ItemImage> itemImage = itemImageRepository.findByItemId(item_id);
+    public Item getItem(String itemId) {
+        Optional<Item> item = itemRepository.findById(itemId);
+        Optional<ItemImage> itemImage = itemImageRepository.findByItemId(itemId);
         if (item.isPresent()) {
             return item.get();
         } else {
@@ -55,10 +55,10 @@ public class ItemService {
     public Item createItem(Item item) {
 
         Item newItem = Item.builder()
-                .item_id(item.getItem_id())
-                .item_name(item.getItem_name())
+                .id(item.getId())
+                .name(item.getName())
                 .recyclable(item.getRecyclable())
-                .recycle_info(item.getRecycle_info())
+                .recycleInfo(item.getRecycleInfo())
                 .category(item.getCategory())
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -69,13 +69,13 @@ public class ItemService {
 
     // 아이템 수정
     public Item updateItem(Item item) {
-        Optional<Item> optional = itemRepository.findById(item.getItem_id());
+        Optional<Item> optional = itemRepository.findById(item.getId());
 
         return optional.map(entityItem -> {
                     // data -> update
-                    entityItem.setItem_id(item.getItem_id())
-                            .setItem_name(item.getItem_name())
-                            .setRecycle_info(item.getRecycle_info())
+                    entityItem.setId(item.getId())
+                            .setName(item.getName())
+                            .setRecycleInfo(item.getRecycleInfo())
                             .setRecyclable(item.getRecyclable())
                             .setCategory(item.getCategory());
                     return itemRepository.save(entityItem);

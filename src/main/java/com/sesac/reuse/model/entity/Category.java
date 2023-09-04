@@ -24,7 +24,8 @@ public class Category {
 
     @Id
     @Enumerated(EnumType.STRING)
-    private CategoryId category_id;
+    @Column(name = "category_id")
+    private CategoryId categoryId;
 
     private String name;
 
