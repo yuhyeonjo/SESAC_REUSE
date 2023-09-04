@@ -603,8 +603,11 @@
                       </div>
                       <div class="mb-4">
                         <label class="form-label">이미지 파일</label>
-                        <div class="card bg-dark border-0 text-white">
-                          <img class="card-img" th:src="@{|/${itemDetail.itemImage.path}|}" alt="Card image">
+                        <div class="card bg-dark border-0 text-white" th:if="${itemDetail.itemImage}">
+                          <img class="card-img"  th:src="@{|/${itemDetail.itemImage.path}|}" alt="Card image">
+                        </div>
+                        <div th:unless="${itemDetail.itemImage}">
+                          <p>이미지가 존재하지 않습니다</p>
                         </div>
                       </div>
                       <div class="mb-4">

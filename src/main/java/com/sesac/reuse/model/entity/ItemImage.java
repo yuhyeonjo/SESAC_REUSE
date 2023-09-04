@@ -34,4 +34,11 @@ public class ItemImage {
     @OneToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
+
+    public ItemImage(Long id, String path, String name) {
+        this.id = id;
+        this.path = path;
+        this.name = name;
+    }
 }
