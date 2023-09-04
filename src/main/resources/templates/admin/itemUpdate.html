@@ -688,19 +688,19 @@
     <!-- item_id 조합 스크립트 -->
     <script th:inline="javascript">
       function updateInputId() {
-        var itemCustomIdList = document.querySelectorAll(".itemCustomIdList");
-        var itemCustomId = document.getElementById("itemCustomId");
+        let itemCustomIdList = document.querySelectorAll(".itemCustomIdList");
+        const itemCustomId = document.getElementById("itemCustomId");
 
-        var selectElement = document.getElementById("category");
-        var selectedValue = selectElement.value;
-        var inputElements = document.querySelectorAll('[data-key="' + selectedValue + '"]');
-        var inputField = document.getElementById("itemCustomId");
-        var inputIdField = document.getElementById("itemId");
+        const selectElement = document.getElementById("category");
+        let selectedValue = selectElement.value;
+        let inputElements = document.querySelectorAll('[data-key="' + selectedValue + '"]');
+        const inputField = document.getElementById("itemCustomId");
+        const inputIdField = document.getElementById("itemId");
         console.log("selectedValue : " + selectedValue);
         console.log("inputIdField : " + inputIdField.value);
         if(selectedValue !== inputIdField.value){
           inputElements.forEach(function (e) {
-            var inputValue = e.value;
+            let inputValue = e.value;
             inputField.value = inputValue;
           });
         }
