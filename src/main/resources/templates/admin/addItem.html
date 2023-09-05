@@ -607,11 +607,11 @@
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-company">이름</label>
-                        <input type="text" class="form-control" id="basic-default-company" name="item_name" placeholder="재활용품명 입력하세요">
+                        <input type="text" class="form-control" id="basic-default-company" name="name" placeholder="재활용품명 입력하세요">
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="basic-default-message">분리수거 방법</label>
-                          <textarea id="basic-default-message" class="form-control" placeholder="분리수거 방법을 입력하세요" name="recycle_info" aria-label="분리수거 방법을 입력하세요" aria-describedby="basic-icon-default-message2"></textarea>
+                          <textarea id="basic-default-message" class="form-control" placeholder="분리수거 방법을 입력하세요" name="recycleInfo" aria-label="분리수거 방법을 입력하세요" aria-describedby="basic-icon-default-message2"></textarea>
                       </div>
                       <div class="mb-4">
                         <label class="form-label" for="inputFile">이미지 파일</label>
@@ -624,7 +624,7 @@
                         <input type="text" class="itemCustomIdList" th:value="${entry.value}" th:attr="data-key=${entry.key}" hidden>
                       </div>
                       <!-- 카테고리 변경 시 item_id 도 변경 -->
-                      <input type="text" id="itemCustomId" name="item_id" hidden>
+                      <input type="text" id="itemCustomId" name="id" hidden>
                       <div class="mb-4">
                         <button type="submit" class="btn btn-primary" onclick="createInputId()">Send</button>
                       </div>
