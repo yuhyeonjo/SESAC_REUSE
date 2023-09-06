@@ -34,7 +34,7 @@ public class ItemServiceTest {
         Item item = itemService.getItem("A001");
         System.out.println(item.getItemImage().getId());
         System.out.println(item.getItemImage().getPath());
-        Assertions.assertEquals(item.getItem_id(), item.getItemImage().getItem().getItem_id());
+        Assertions.assertEquals(item.getId(), item.getItemImage().getItem().getId());
     }
 
 //    // 아이템 목록 조회
